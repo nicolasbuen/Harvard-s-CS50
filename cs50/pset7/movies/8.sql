@@ -1,0 +1,1 @@
+SELECT name FROM people JOIN((SELECT * FROM stars JOIN(SELECT id as movies_movie_id FROM movies WHERE title = "Toy Story") ON movie_id = movies_movie_id)) ON person_id = id
