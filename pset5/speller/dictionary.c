@@ -8,9 +8,6 @@
 
 #include "dictionary.h"
 
-// hash table size = 2^16
-const int HASHTABLE_SIZE = 65536;
-
 // define linked list node
 typedef struct node
 {
@@ -19,11 +16,11 @@ typedef struct node
 } node;
 
 // initialise hash table
-node *hash_table[HASHTABLE_SIZE];
+node *hash_table[65536];
 
 /**
 * Returns integer hash value for a given a string
-* https://www.reddit.com/r/cs50/comments/1x6vc8/pset6_trie_vs_hashtable/cf9nlkn/
+* CREDIT: https://www.reddit.com/r/cs50/comments/1x6vc8/pset6_trie_vs_hashtable/cf9nlkn/
 **/
 unsigned int hash(const char* needs_hashing)
 {
@@ -39,10 +36,10 @@ unsigned int hash(const char* needs_hashing)
 bool check(const char *word)
 {
 
-    // initialise lower case word
+    // initialize lower case word
     char lcword[46];
 
-    // convert to lowercase, as we need this to lookup. TODO: change from length to length of word
+    // convert to lowercase, as we need this to lookup. 
     for (int i = 0; i < 46; i++)
     {
         lcword[i] = tolower(word[i]);
@@ -56,7 +53,6 @@ bool check(const char *word)
     node *cursor = hash_table[hash(lcword)];
 
 
-    // traverse list
     while (cursor != NULL)
     {
         // check node's word to see if it is target word, ignoring case
@@ -119,7 +115,7 @@ unsigned int size(void)
     int counter = 0;
 
     // iterate through hashtable
-    for (int i = 0; i < HASHTABLE_SIZE; i++)
+    for (int i = 0; i < 65536; i++)
     {
         // set pointer to head of list
         node *cursor = hash_table[i];
@@ -137,8 +133,7 @@ unsigned int size(void)
 // Unloads dictionary from memory, returning true if successful else false
 bool unload(void)
 {
-    // TODO
-    for (int i = 0; i < HASHTABLE_SIZE; i++)
+    for (int i = 0; i < 65536; i++)
     {
         while (hash_table[i] != NULL)
         {
